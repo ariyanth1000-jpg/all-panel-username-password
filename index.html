@@ -3,162 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Responsive Copy Panel</title>
+<title>TA Premium Access Panel</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    min-height:100vh;
-    padding:20px;
-    background: linear-gradient(-45deg,#ffffff,#eef3ff,#fef6ff,#eafff5);
-    background-size:400% 400%;
-    animation:bgMove 12s ease infinite;
+  min-height:100vh;
+  padding:20px;
+  background:linear-gradient(-45deg,#eef2ff,#fdf2f8,#ecfeff,#f0fdf4);
+  background-size:500% 500%;
+  animation:bgMove 10s ease infinite;
+  overflow-x:hidden;
 }
 
 @keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  filter:blur(45px);
+  opacity:.45;
+  z-index:-1;
+  animation:float 8s ease-in-out infinite alternate;
+}
+
+body::before{
+  background:#8b5cf6;
+  top:8%;
+  left:-80px;
+}
+
+body::after{
+  background:#22c55e;
+  bottom:5%;
+  right:-80px;
+  animation-delay:1.5s;
+}
+
+@keyframes float{
+  from{transform:translateY(0) scale(1)}
+  to{transform:translateY(45px) scale(1.15)}
 }
 
 .container{
-    max-width:650px;
-    margin:auto;
-    background:rgba(255,255,255,.75);
-    backdrop-filter:blur(18px);
-    border-radius:20px;
-    padding:clamp(12px, 3vw, 30px);
-    box-shadow:0 15px 40px rgba(0,0,0,.1);
+  max-width:680px;
+  margin:auto;
+  position:relative;
+  padding:3px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#6366f1,#ec4899,#22c55e,#06b6d4,#6366f1);
+  background-size:400% 400%;
+  animation:borderGlow 5s linear infinite, cardShow .8s ease;
+  box-shadow:0 20px 55px rgba(79,70,229,.25);
+}
+
+@keyframes borderGlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.inner{
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(22px);
+  border-radius:25px;
+  padding:clamp(16px,3vw,34px);
+}
+
+@keyframes cardShow{
+  from{opacity:0;transform:translateY(35px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* TA Logo */
+.logoBox{
+  width:82px;
+  height:82px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#4f46e5,#9333ea,#ec4899);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:1px;
+  box-shadow:0 0 25px rgba(147,51,234,.45);
+  animation:logoPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes logoPulse{
+  from{transform:scale(1);box-shadow:0 0 18px rgba(147,51,234,.35)}
+  to{transform:scale(1.06);box-shadow:0 0 34px rgba(236,72,153,.55)}
 }
 
 .main-title{
-    text-align:center;
-    font-size:clamp(18px, 4vw, 32px);
-    font-weight:700;
-    margin-bottom:20px;
-    color:#111;
+  text-align:center;
+  font-size:clamp(21px,4vw,34px);
+  font-weight:900;
+  margin-bottom:8px;
+  background:linear-gradient(135deg,#4f46e5,#9333ea,#0ea5e9);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.sub-title{
+  text-align:center;
+  color:#64748b;
+  font-size:clamp(11px,2.8vw,14px);
+  margin-bottom:18px;
+}
+
+.panel{
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(99,102,241,.18);
+  border-radius:20px;
+  padding:16px;
+  margin-top:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.05);
+  animation:fadeUp .8s ease both;
+}
+
+.panel:nth-of-type(2){
+  animation-delay:.15s;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
 }
 
 .panel-title{
-    text-align:center;
-    font-size:clamp(14px, 3.5vw, 22px);
-    font-weight:700;
-    color:#4f46e5;
-    margin:15px 0;
+  text-align:center;
+  font-size:clamp(15px,3.5vw,22px);
+  font-weight:900;
+  color:#4f46e5;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  color:white;
+  background:linear-gradient(135deg,#10b981,#22c55e);
+  box-shadow:0 6px 18px rgba(16,185,129,.25);
+  animation:badgePulse 1.8s infinite alternate;
+}
+
+.badge.secure{
+  background:linear-gradient(135deg,#0ea5e9,#6366f1);
+}
+
+@keyframes badgePulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.05)}
 }
 
 .copy-btn{
-    width:100%;
-    border:none;
-    padding:clamp(10px, 3vw, 16px);
-    margin:6px 0;
-    border-radius:12px;
-    cursor:pointer;
-    background:linear-gradient(135deg,#6366f1,#8b5cf6);
-    color:white;
-    font-weight:600;
-    font-size:clamp(10px, 3.5vw, 16px);
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    transition:.3s;
+  width:100%;
+  border:none;
+  padding:clamp(12px,3vw,17px);
+  margin:7px 0;
+  border-radius:15px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899);
+  background-size:200% 200%;
+  color:white;
+  font-weight:800;
+  font-size:clamp(11px,3.5vw,16px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  transition:.3s;
+  box-shadow:0 10px 25px rgba(99,102,241,.28);
+  animation:btnGradient 4s ease infinite;
+  position:relative;
+}
+
+@keyframes btnGradient{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.copy-btn::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:80%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);
+  transition:.5s;
+}
+
+.copy-btn:hover::after{
+  left:120%;
 }
 
 .copy-btn:hover{
-    transform:translateY(-2px);
+  transform:translateY(-3px) scale(1.01);
+  box-shadow:0 14px 30px rgba(99,102,241,.38);
+}
+
+.copy-btn:active{
+  transform:scale(.96);
+}
+
+.copy-btn.copied{
+  background:linear-gradient(135deg,#10b981,#22c55e);
+  box-shadow:0 12px 28px rgba(34,197,94,.35);
 }
 
 .copy-text{
-    text-align:center;
-    font-size:clamp(10px, 2.8vw, 14px);
-    color:#666;
-    margin-bottom:12px;
+  text-align:center;
+  font-size:clamp(10px,2.8vw,14px);
+  color:#555;
+  margin-bottom:13px;
+  line-height:1.5;
 }
 
 hr{
-    border:none;
-    height:1px;
-    margin:20px 0;
-    background:linear-gradient(to right,transparent,#ccc,transparent);
+  border:none;
+  height:1px;
+  margin:20px 0;
+  background:linear-gradient(to right,transparent,#a5b4fc,transparent);
 }
 
 .toast{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#10b981;
-    color:white;
-    padding:10px 20px;
-    border-radius:10px;
-    opacity:0;
-    transition:.3s;
-    font-weight:600;
+  position:fixed;
+  bottom:22px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:linear-gradient(135deg,#10b981,#22c55e);
+  color:white;
+  padding:12px 22px;
+  border-radius:14px;
+  opacity:0;
+  transition:.35s;
+  font-weight:800;
+  max-width:90%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  box-shadow:0 10px 25px rgba(16,185,129,.35);
+  z-index:999;
 }
 
 .toast.show{
-    opacity:1;
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+.footer-note{
+  text-align:center;
+  margin-top:18px;
+  color:#64748b;
+  font-size:12px;
+  font-weight:600;
+}
+
+@media(max-width:420px){
+  body{padding:12px}
+  .logoBox{
+    width:70px;
+    height:70px;
+    font-size:26px;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
+  <div class="inner">
+
+    <div class="logoBox">TA</div>
 
     <div class="main-title">TA Premium Access Panel</div>
+    <div class="sub-title">Secure Login Access • Fast Copy System</div>
 
-    <!-- P2P SMS Panel -->
-    <div class="panel-title">P2P SMS Panel</div>
-    <button class="copy-btn" onclick="copyText('Trendinacademylimited@gmail.com')">
-        Trendinacademylimited@gmail.com
-    </button>
-    <div class="copy-text">এটা Copy করে E-mail এবং Password এর box বসাবে। </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">P2P, V3, Smart plus, & Nexus Panel</div>
+        <span class="badge">Premium</span>
+      </div>
 
-    <hr>
+      <button class="copy-btn" onclick="copyText(this,'Trendingacademylimited@gmail.com')">
+        📧 Trendingacademylimited@gmail.com
+      </button>
+      <div class="copy-text">এটা Copy করে Email এর Box এ বসাবে</div>
 
-    <!-- V3, Smart Plus, Nexus Panel -->
-    <div class="panel-title"> V3, Smart plus, & Nexus Panel</div>
-    <button class="copy-btn" onclick="copyText('Trendingacademylimited@gmail.com')">
-        Trendingacademylimited@gmail.com
-    </button>
-    <div class="copy-text">এটা Copy করে Email এর Box এ বসাবে </div>
-
-    <button class="copy-btn" onclick="copyText('Tamim198')">
-        Tamim198
-    </button>
-    <div class="copy-text">এটা Copy করে  Password এর Box এ বসাবে </div>
+      <button class="copy-btn" onclick="copyText(this,'Tamim198')">
+        🔐 Tamim198
+      </button>
+      <div class="copy-text">এটা Copy করে Password এর Box এ বসাবে</div>
+    </div>
 
     <hr>
 
-    <!-- Cloud Network Panel -->
-    <div class="panel-title">Cloud Network Panel</div>
-    <button class="copy-btn" onclick="copyText('clubt431@gmail.com')">
-        clubt431@gmail.com
-    </button>
-    <div class="copy-text">এটা Copy করে Email এর Box এ বসাবে</div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Cloud Network Panel</div>
+        <span class="badge secure">Secure Access</span>
+      </div>
 
-    <button class="copy-btn" onclick="copyText('11AA@@@@')">
-        11AA@@@@
-    </button>
-    <div class="copy-text">এটা Copy করে Password এর Box এ বসাবে </div>
+      <button class="copy-btn" onclick="copyText(this,'clubt431@gmail.com')">
+        📧 clubt431@gmail.com
+      </button>
+      <div class="copy-text">এটা Copy করে Email এর Box এ বসাবে</div>
 
+      <button class="copy-btn" onclick="copyText(this,'11AA@@@@')">
+        🔐 11AA@@@@
+      </button>
+      <div class="copy-text">এটা Copy করে Password এর Box এ বসাবে</div>
+    </div>
+
+    <div class="footer-note">Trending Academy Limited © Premium Access</div>
+
+  </div>
 </div>
 
 <div id="toast" class="toast">Copied</div>
 
 <script>
-function copyText(text){
-    navigator.clipboard.writeText(text);
+function copyText(button,text){
+
+  navigator.clipboard.writeText(text).then(()=>{
+
+    if(navigator.vibrate){
+      navigator.vibrate(80);
+    }
+
+    const oldText = button.innerHTML;
+
+    button.innerHTML = "Copied ✅";
+    button.classList.add("copied");
+
     const toast = document.getElementById("toast");
     toast.innerText = "Copied: " + text;
     toast.classList.add("show");
-    setTimeout(()=>{toast.classList.remove("show");},2000);
+
+    setTimeout(()=>{
+      button.innerHTML = oldText;
+      button.classList.remove("copied");
+      toast.classList.remove("show");
+    },1600);
+
+  }).catch(()=>{
+    alert("Copy failed. Please try again.");
+  });
 }
 </script>
 
